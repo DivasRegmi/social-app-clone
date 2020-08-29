@@ -1,32 +1,40 @@
-import React from 'react';
-import {Switch, Route} from 'react-router-dom'
+import React from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
 
-import Header from './components/headerAndFooter/Header'
-import Footer from './components/headerAndFooter/Footer'
-import HomePage from './pages/home/HomePage'
-import LoginPage from './pages/login/LoginPage'
+import Header from "./components/headerAndFooter/Header";
+import Footer from "./components/headerAndFooter/Footer";
+import HomePage from "./pages/home/HomePage";
+import LoginPage from "./pages/login/LoginPage";
 
+import "./App.css";
 
-import './App.css';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 
+import Facebook from "./components/facebook/Facebook";
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+library.add(fab);
 
-library.add(fab)
+function App({ location }) {
+  const headerFooter = () => {
+    if (location.pathname === "/facebook/signup") return false;
+    if (location.pathname === "/google/signup") return false;
+    if (location.pathname === "/instagram/signup") return false;
 
-function App() {
-  
+    return true;
+  };
   return (
     <div>
-     <Header />
-     <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/login" component={LoginPage} />
-        </Switch>
-     <Footer />
+      {headerFooter() ? <Header /> : ""}
+
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/facebook/signup" component={Facebook} />
+      </Switch>
+      {headerFooter() ? <Footer /> : ""}
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

@@ -2,7 +2,7 @@ import { UserActionTypes } from "./user.types";
 
 const INITIAL_STATE = {
   activeUser: false,
-  errors: null
+  errors: {err: false}
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -12,10 +12,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         activeUser: action.payLoad,
       };
+    case UserActionTypes.SET_LOGOUT:
+      return {
+        ...state,
+        activeUser: action.payLoad,
+      };
     case UserActionTypes.SET_ERRORS:
       return {
         ...state,
-        Errors: action.payLoad,
+        errors: action.payLoad,
       };
 
     default:

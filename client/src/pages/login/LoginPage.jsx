@@ -5,7 +5,7 @@ import SignUp from "../../components/signInAndSignUp/SignUp";
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    minHeight: "85vh",
+    minHeight:"86vh",
     [theme.breakpoints.up("md")]: {
       display: "flex",
       justifyContent: "center",

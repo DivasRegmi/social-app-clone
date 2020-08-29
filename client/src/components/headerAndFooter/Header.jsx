@@ -1,11 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import { setLogOut } from "../../redux/user/user.action";
+
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import classNames from 'classnames'
+import classNames from "classnames";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,31 +26,35 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "white",
   },
-  ml:{
-    marginLeft: "auto"
-  }
+  ml: {
+    marginLeft: "auto",
+  },
 }));
 
-function Header(history) {
+function Header({ history, user, logOut }) {
   const classes = useStyles();
 
   return (
     <AppBar position="static" className={classes.black}>
       <Toolbar>
-       
         <Link to="/" className={classes.link}>
-          <Typography variant="h6">
-            Crypto Mine
-          </Typography>
+          <Typography variant="h6">Crypto Mine</Typography>
         </Link>
-    
-        
+
         <Link to="/login" className={classNames(classes.link, classes.ml)}>
-          <Button>login</Button>
+          <Button onClick={() => logOut()}>{user ? "Logout" : "Login"}</Button>
         </Link>
       </Toolbar>
     </AppBar>
   );
 }
 
-export default Header;
+const mapStateToProp = (state) => ({
+  user: state.user.activeUser,
+});
+
+const mapDispatchToProp = (dispatch) => ({
+  logOut: () => dispatch(setLogOut()),
+});
+
+export default connect(mapStateToProp, mapDispatchToProp)(Header);

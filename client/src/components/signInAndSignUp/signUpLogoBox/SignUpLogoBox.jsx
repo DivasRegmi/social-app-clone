@@ -30,10 +30,10 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function SignUpLogoBox({ logo, title,  }) {
+function SignUpLogoBox({ logo, title, onClick }) {
   const classes = useStyle();
   return (
-    <div className={classes.root} >
+    <div className={classes.root} onClick={onClick} >
 
       <div className={classes.logo} children={logo} />
       <Typography className={classes.title} variant="body1" children={title} />

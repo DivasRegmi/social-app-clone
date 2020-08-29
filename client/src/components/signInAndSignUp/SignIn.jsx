@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { connect } from "react-redux";
+
+import { setErrors, setLogin } from "../../redux/user/user.action";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -33,22 +35,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn = () => {
+const SignIn = ({ errors, setErrors, logIn }) => {
   const classes = useStyles();
   const [userCrediential, setUserCrediential] = useState({
     email: "",
     password: "",
   });
 
-  const [errors, seterrors] = useState({ err: false });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserCrediential({ ...userCrediential, [name]: [value] });
-    seterrors({
-      email: "",
-      password: "",
-    });
+
+    if (errors.err) {
+      setErrors({
+        ...errors,
+        err: false,
+        [name]: "",
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -59,21 +63,15 @@ const SignIn = () => {
       password: userCrediential.password.toString(),
     };
 
-    axios
-      .post("/api/users/login", user)
-      .then((res) => console.log(res))
-      .catch((err) => {
-        seterrors({ ...err.response.data, err: true });
-      })
-      .then(() => {
-        if (errors.email) {
-          setUserCrediential({ ...userCrediential, email: "" });
-        }
+    logIn(user);
 
-        if (errors.password) {
-          setUserCrediential({ ...userCrediential, password: "" });
-        }
-      });
+    if (errors.email) {
+      setUserCrediential({ ...userCrediential, email: "" });
+    }
+
+    if (errors.password) {
+      setUserCrediential({ ...userCrediential, password: "" });
+    }
   };
 
   return (
@@ -135,4 +133,13 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+const mapStateToProps = (state) => ({
+  errors: state.user.errors,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setErrors: (errors) => dispatch(setErrors(errors)),
+  logIn: (user) => dispatch(setLogin(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
