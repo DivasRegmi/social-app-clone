@@ -12,6 +12,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import Facebook from "./components/facebook/Facebook";
+import Google from "./components/google/Google";
 
 library.add(fab);
 
@@ -31,6 +32,7 @@ function App({ location }) {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/facebook/signup" component={Facebook} />
+        <Route exact path="/google/signup" component={Google} />
       </Switch>
       {headerFooter() ? <Footer /> : ""}
     </div>

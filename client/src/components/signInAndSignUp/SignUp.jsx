@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { makeStyles, Typography } from "@material-ui/core";
 import SignUpLogoBox from "./signUpLogoBox/SignUpLogoBox";
@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import NewWindow from "react-new-window";
 
-import Facebook from "../facebook/Facebook";
 
 const facebookIcon = <FontAwesomeIcon icon={["fab", "facebook"]} size="2x" />;
 const googleIcon = <FontAwesomeIcon icon={["fab", "google"]} size="2x" />;
@@ -37,6 +36,8 @@ function SignUp({ history }) {
   const [google, setgoogle] = useState(false);
   const [instagram, setinstagram] = useState(false);
 
+  
+
   return (
     <div className={classes.root}>
       <div className={classes.info}>
@@ -58,22 +59,40 @@ function SignUp({ history }) {
         title="Continue with Instagram"
         onClick={(set) => setinstagram(true)}
       />
-
+      {/* New window is pop up  */}
       {facebook ? (
         <NewWindow
           url="/facebook/signup"
           name="facebook"
           title="facebook"
           center="screen"
-          onUnload={() => setfacebook(false)}
+          onUnload={() => {
+            setfacebook(false);
+          }}
           features={{
             height: "500px",
             width: "500px",
           }}
-          copyStyles={true}
-        >
-          <Facebook />
-        </NewWindow>
+          copyStyles
+        />
+       
+      ) : null}
+      {google ? (
+        <NewWindow
+          url="/google/signup"
+          name="google"
+          title="google"
+          center="screen"
+          onUnload={() => {
+            setgoogle(false);
+          }}
+          features={{
+            height: "500px",
+            width: "500px",
+          }}
+          copyStyles
+        />
+       
       ) : null}
     </div>
   );

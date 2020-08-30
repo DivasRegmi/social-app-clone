@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { setLogOut } from "../../redux/user/user.action";
 
@@ -9,14 +10,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import classNames from "classnames";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-  },
-  black: {
-    // background: '#151515'
   },
 
   title: {
@@ -31,8 +28,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header({ history, user, logOut }) {
+function Header({ user, logOut }) {
   const classes = useStyles();
+  const history = useHistory();
+  const handleLogOut = () => {
+    if (user && window.confirm("Do you want to log Out?")) {
+      logOut();
+    }
+    if (!user) {
+      history.push("/login");
+    }
+  };
 
   return (
     <AppBar position="static" className={classes.black}>
@@ -41,9 +47,9 @@ function Header({ history, user, logOut }) {
           <Typography variant="h6">Crypto Mine</Typography>
         </Link>
 
-        <Link to="/login" className={classNames(classes.link, classes.ml)}>
-          <Button onClick={() => logOut()}>{user ? "Logout" : "Login"}</Button>
-        </Link>
+        <Button style={{color:"white"}} type="button" className={classes.ml} onClick={handleLogOut}>
+          {user ? "Logout" : "Login"}
+        </Button>
       </Toolbar>
     </AppBar>
   );

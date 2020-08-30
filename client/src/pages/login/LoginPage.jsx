@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core";
 import SignIn from "../../components/signInAndSignUp/SignIn";
 import SignUp from "../../components/signInAndSignUp/SignUp";
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    minHeight:"86vh",
+    minHeight: "86vh",
     [theme.breakpoints.up("md")]: {
       display: "flex",
       justifyContent: "center",
@@ -15,17 +18,30 @@ const useStyle = makeStyles((theme) => ({
   signIn: {
     [theme.breakpoints.up("md")]: {
       transform: "translate(0, -95px)",
-      width: "50%"
+      width: "50%",
     },
   },
   signUp: {
     [theme.breakpoints.up("md")]: {
-      width: "50%"
+      width: "50%",
     },
-  }
+  },
 }));
 
-function LoginPage() {
+
+function LoginPage({ user }) {
+  const history = useHistory();
+
+  useEffect(() => {
+    window.addEventListener("SignUp is ready to close", () => { console.log("listern");});
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      history.push("/");
+    }
+  }, [user]);
+
   const classes = useStyle();
   return (
     <div className={classes.root}>
@@ -39,4 +55,8 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+const mapStateToProp = (state) => ({
+  user: state.user.activeUser,
+});
+
+export default connect(mapStateToProp, null)(LoginPage);
