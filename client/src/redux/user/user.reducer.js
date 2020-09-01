@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   activeUser: false,
   errors: { err: false },
   userInfo: {},
+  first: true,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -12,6 +13,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         activeUser: action.payLoad,
+      };
+    case UserActionTypes.SET_FIRST:
+      return {
+        ...state,
+        first: action.payLoad,
       };
     case UserActionTypes.SET_LOGOUT:
       return {

@@ -5,6 +5,10 @@ export const setCurrentUser = (user) => ({
   type: UserActionTypes.SET_CURRENT_USER,
   payLoad: user,
 });
+export const setFirst = (boolFirst) => ({
+  type: UserActionTypes.SET_FIRST,
+  payLoad: boolFirst,
+});
 export const setErrors = (errors) => ({
   type: UserActionTypes.SET_ERRORS,
   payLoad: errors,

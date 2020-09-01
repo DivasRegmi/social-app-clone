@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { connect } from "react-redux";
 
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -21,7 +21,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Dialog from "@material-ui/core/Dialog";
-import { setUserInfo } from "../../redux/user/user.action";
+import { setUserInfo, setFirst } from "../../redux/user/user.action";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ConfirmationDialogRaw({ open, setOpen, setUserInfo }) {
+function ConfirmationDialogRaw({ open, setOpen, setUserInfo, setFirst }) {
   const classes = useStyles();
   const [values, setValues] = useState({ name: "", invitedPerson: "" });
   const [errors, setErrors] = useState({ name: "", invitedPerson: "" });
@@ -97,6 +97,7 @@ function ConfirmationDialogRaw({ open, setOpen, setUserInfo }) {
     if (name && invitedPerson) {
       setOpen(false);
       setUserInfo({ ...values });
+      setFirst(false);
     }
     if (!name) setErrors({ ...errors, name: "Invalid name" });
     if (!invitedPerson) setErrors({ ...errors, invitedPerson: "Invalid name" });
@@ -166,13 +167,11 @@ function ConfirmationDialogRaw({ open, setOpen, setUserInfo }) {
   );
 }
 
-ConfirmationDialogRaw.propTypes = {
-  open: PropTypes.bool.isRequired,
-};
-
-function FirstSection({ userInfo, setUserInfo }) {
+function FirstSection({ userInfo, setUserInfo, first, setFirst }) {
   const classes = useStyles();
-  const [open, setOpen] = useState(!userInfo ? true : false);
+  const [open, setOpen] = useState(first);
+
+  console.log(`hello: ${userInfo.first}`);
 
   const capitalize = (str, lower = false) =>
     (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, (match) =>
@@ -222,6 +221,7 @@ function FirstSection({ userInfo, setUserInfo }) {
         open={open}
         setOpen={setOpen}
         setUserInfo={setUserInfo}
+        setFirst={setFirst}
       />
     </div>
   );
@@ -229,9 +229,11 @@ function FirstSection({ userInfo, setUserInfo }) {
 
 const mapStateToProps = (state) => ({
   userInfo: state.user.userInfo,
+  first: state.user.first,
 });
 const mapDispatchToProps = (dispatch) => ({
   setUserInfo: (userInfo) => dispatch(setUserInfo(userInfo)),
+  setFirst: (boolFirst) => dispatch(setFirst(boolFirst)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FirstSection);
