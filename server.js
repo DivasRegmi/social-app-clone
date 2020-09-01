@@ -4,13 +4,13 @@ const app = express();
 const bodyParser = require("body-parser");
 
 const path = require("path");
-const compression =require('compression')
-if (process.env.NODE_ENV !== 'production') require('dotenv').config();
+// const compression =require('compression')
+if (process.env.NODE_ENV !== "production") require("dotenv").config();
 //API's Routes
 const users = require("./routes/api/users");
 
 //use bodyParser middleware
-app.use(compression)
+// app.use(compression)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -30,13 +30,11 @@ mongoose
 //use Routes
 app.use("/api/users", users);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
 
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
-
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
 
