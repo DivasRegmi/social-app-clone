@@ -1,20 +1,18 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-
-import Header from "./components/headerAndFooter/Header";
-import Footer from "./components/headerAndFooter/Footer";
-import HomePage from "./pages/home/HomePage";
-import LoginPage from "./pages/login/LoginPage";
-
-import "./App.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
-import Facebook from "./components/facebook/Facebook";
-import Google from "./components/google/Google";
-import Main from "./pages/main/Main";
-import Error from "./pages/Error";
+import Header from "./components/headerAndFooter/Header";
+import Footer from "./components/headerAndFooter/Footer";
+
+const HomePage = lazy(() => import("./pages/home/HomePage"));
+const LoginPage = lazy(() => import("./pages/login/LoginPage"));
+const Google = lazy(() => import("./components/google/Google"));
+const Facebook = lazy(() => import("./components/facebook/Facebook"));
+const Main = lazy(() => import("./pages/main/Main"));
+const Error = lazy(() => import("./pages/Error"));
 
 library.add(fab);
 
@@ -30,15 +28,17 @@ function App({ location }) {
     <div>
       {headerFooter() ? <Header /> : ""}
 
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/main" component={Main} />
+      <Suspense fallback={<div></div>}>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/main" component={Main} />
 
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/facebook/signup" component={Facebook} />
-        <Route exact path="/google/signup" component={Google} />
-        <Route  path="*" component={Error} />
-      </Switch>
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/facebook/signup" component={Facebook} />
+          <Route exact path="/google/signup" component={Google} />
+          <Route exact path="*" component={Error} />
+        </Switch>
+      </Suspense>
       {headerFooter() ? <Footer /> : ""}
     </div>
   );
