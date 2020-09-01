@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route, useLocation, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -16,7 +17,8 @@ const Error = lazy(() => import("./pages/Error"));
 
 library.add(fab);
 
-function App({ location }) {
+function App({ user }) {
+  const location = useLocation();
   const headerFooter = () => {
     if (location.pathname === "/facebook/signup") return false;
     if (location.pathname === "/google/signup") return false;
@@ -24,6 +26,7 @@ function App({ location }) {
 
     return true;
   };
+
   return (
     <div>
       {headerFooter() ? <Header /> : ""}
@@ -31,9 +34,17 @@ function App({ location }) {
       <Suspense fallback={<div></div>}>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/main" component={Main} />
+          <Route
+            exact
+            path="/main"
+            render={() => (user ? <Redirect to="/" /> : <Main />)}
+          />
 
-          <Route exact path="/login" component={LoginPage} />
+          <Route
+            exact
+            path="/login"
+            render={() => (user ? <Redirect to="/main" /> : <LoginPage />)}
+          />
           <Route exact path="/facebook/signup" component={Facebook} />
           <Route exact path="/google/signup" component={Google} />
           <Route exact path="*" component={Error} />
@@ -44,4 +55,8 @@ function App({ location }) {
   );
 }
 
-export default withRouter(App);
+const mapStateToProp = (state) => ({
+  user: state.user.activeUser,
+});
+
+export default connect(mapStateToProp)(App);

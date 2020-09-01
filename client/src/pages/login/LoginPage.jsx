@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { lazy, Suspense } from "react";
 
 import { makeStyles } from "@material-ui/core";
-import SignIn from "../../components/signInAndSignUp/SignIn";
-import SignUp from "../../components/signInAndSignUp/SignUp";
+const SignIn = lazy(() => import("../../components/signInAndSignUp/SignIn"));
+const SignUp = lazy(() => import("../../components/signInAndSignUp/SignUp"));
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -28,35 +26,22 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-
-function LoginPage({ user }) {
-  const history = useHistory();
-
-  useEffect(() => {
-    window.addEventListener("SignUp is ready to close", () => { console.log("listern");});
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      history.push("/main");
-    }
-  }, [user]);
-
+function LoginPage() {
   const classes = useStyle();
   return (
     <div className={classes.root}>
       <div className={classes.signIn}>
-        <SignIn />
+        <Suspense fallback={<div></div>}>
+          <SignIn />
+        </Suspense>
       </div>
       <div className={classes.signUp}>
-        <SignUp />
+        <Suspense fallback={<div></div>}>
+          <SignUp />
+        </Suspense>
       </div>
     </div>
   );
 }
 
-const mapStateToProp = (state) => ({
-  user: state.user.activeUser,
-});
-
-export default connect(mapStateToProp, null)(LoginPage);
+export default LoginPage;

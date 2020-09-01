@@ -181,25 +181,28 @@ function FirstSection({ userInfo, setUserInfo }) {
   return (
     <div className={classes.root}>
       <Grid container>
-        <Grid item xs="12" sm="5">
+        <Grid item xs={12} sm={5}>
           <div className={classes.userInfo}>
             <AccountCircleIcon classes={{ root: classes.userIcon }} />
 
             <div className={classes.userText}>
               <Typography className={classes.online} variant="h6">
-                Name: {capitalize(userInfo.name)}
+                Name: {userInfo.name ? capitalize(userInfo.name) : ""}
               </Typography>
 
               <Typography variant="h6">
                 {" "}
-                Friend: {capitalize(userInfo.invitedPerson)}
+                Friend:{" "}
+                {userInfo.invitedPerson
+                  ? capitalize(userInfo.invitedPerson)
+                  : ""}
               </Typography>
               <Typography variant="h6"> Location: Nepal</Typography>
               <Typography variant="h6"> Earned: 0 Bitcoin</Typography>
             </div>
           </div>
         </Grid>
-        <Grid item xs="12" sm="7">
+        <Grid item xs={12} sm={7}>
           <div className={classes.bitcoinInfo}>
             <Typography variant="body1" color="textSecondary">
               1 Bitcoin equals

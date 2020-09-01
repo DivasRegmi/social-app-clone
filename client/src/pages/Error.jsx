@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import { useState } from "react";
 
 const useStyles = makeStyles(() => ({
   errorImageOverlay: {
@@ -30,7 +29,9 @@ function Error() {
   return (
     <div className={classes.errorImageOverlay}>
       <div className={classes.errorImageContainer}></div>
-      <div className={classes.errorImageText}>Sorry!!! 500 Internal server error</div>
+      <div className={classes.errorImageText}>
+        Sorry!!! 500 Internal server error
+      </div>
       <div className={classes.errorImageText}>We will fix soon...</div>
     </div>
   );

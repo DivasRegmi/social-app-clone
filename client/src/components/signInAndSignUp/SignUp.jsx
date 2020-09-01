@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { makeStyles, Typography } from "@material-ui/core";
 import SignUpLogoBox from "./signUpLogoBox/SignUpLogoBox";
@@ -34,7 +34,7 @@ function SignUp({ history }) {
   const classes = useStyle();
   const [facebook, setfacebook] = useState(false);
   const [google, setgoogle] = useState(false);
-  const [instagram, setinstagram] = useState(false);
+  // const [instagram, setinstagram] = useState(false);
 
   
 

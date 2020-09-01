@@ -1,19 +1,22 @@
-import React from "react";
-
-import HomeWelcomeSection from '../../components/homeSections/homeWelcomeSection/HomeWelcomeSection'
-import HomeSections from '../../components/homeSections/HomeSections';
-
-
+import React, { lazy, Suspense } from "react";
 
 import "./home.scss";
 
-function HomePage() {
+const HomeWelcomeSection = lazy(() =>
+  import("../../components/homeSections/homeWelcomeSection/HomeWelcomeSection")
+);
+const HomeSections = lazy(() =>
+  import("../../components/homeSections/HomeSections")
+);
 
+function HomePage() {
   return (
     <div className="homecontainer">
-     <HomeWelcomeSection />
-     <HomeSections />
-     </div>
+      <Suspense fallback={<div></div>}>
+        <HomeWelcomeSection />
+        <HomeSections />
+      </Suspense>
+    </div>
   );
 }
 
