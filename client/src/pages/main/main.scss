@@ -1,0 +1,167 @@
+.home-main-zxyaamdfadfa {
+  .h-c-page {
+    color: #202124;
+    cursor: auto;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.444;
+    word-wrap: break-word;
+    display: block;
+    box-sizing: content-box;
+    margin: 0 auto;
+    width: auto;
+    max-width: 1280px;
+    padding: 0 32px;
+  }
+
+  .h-u-mb-l {
+    margin-bottom: 54px;
+  }
+  .h-u-mt-l {
+    margin-top: 36px;
+  }
+  .description {
+    margin: 10px 10px 10px 30px;
+    padding: 0;
+  }
+  section .h-c-table {
+    margin-bottom: 20px;
+  }
+  .h-c-table {
+    border: 1px solid #fff;
+    border-width: 0 1px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+  }
+  .h-c-table--comparisontable-altrows tr:nth-of-type(odd) {
+    background-color: rgba(32, 33, 36, 0.03);
+  }
+  .h-c-table--comparisontable-altrows td,
+  .h-c-table--comparisontable-altrows tr {
+    border: none;
+  }
+  .h-c-table--comparisontable-altrows tr {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+  tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+  }
+  section .h-c-table th {
+    background-color: #f5f5f5;
+    padding: 10px 2.12%;
+  }
+  section .h-c-table td,
+  section .h-c-table th {
+    border: 1px solid #ddd;
+    word-break: break-word;
+  }
+  .h-c-table--comparisontable-altrows td,
+  .h-c-table--comparisontable-altrows th {
+    padding: 20px 2.12%;
+  }
+
+  .h-c-table th {
+    line-height: 1.57143;
+    color: #202124;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.25px;
+    padding: 12px 2.12% 12px;
+    text-align: left;
+    vertical-align: bottom;
+  }
+  .h-c-table td {
+    line-height: 1.71429;
+    color: #202124;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    padding: 20px 2.12%;
+    vertical-align: top;
+  }
+
+  section .h-c-table td {
+    padding: 5px 2.12%;
+  }
+  section .h-c-table td,
+  section .h-c-table th {
+    border: 1px solid #ddd;
+    word-break: break-word;
+  }
+
+  .h-c-page p {
+    line-height: 1.71429;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+  }
+
+  .h-c-page li {
+    line-height: 1.71429;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+  }
+
+  .h-c-page {
+    padding-bottom: 100px;
+
+    blockquote,
+    dd,
+    div,
+    dl,
+    dt,
+    form,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    li,
+    ol,
+    p,
+    pre,
+    td,
+    th,
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    section .h-c-table .region {
+      background-color: #fff;
+      vertical-align: middle;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    section h3 {
+      line-height: 1.43;
+      margin: 10px 0;
+    }
+  }
+
+  @media (min-width: 600px) {
+    dd,
+    dt,
+    li {
+      line-height: 1.71429;
+      font-size: 14px;
+      letter-spacing: 0.25px;
+    }
+  }
+}

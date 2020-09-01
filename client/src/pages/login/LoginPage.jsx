@@ -38,7 +38,7 @@ function LoginPage({ user }) {
 
   useEffect(() => {
     if (user) {
-      history.push("/");
+      history.push("/main");
     }
   }, [user]);
 

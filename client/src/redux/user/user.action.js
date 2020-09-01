@@ -9,6 +9,10 @@ export const setErrors = (errors) => ({
   type: UserActionTypes.SET_ERRORS,
   payLoad: errors,
 });
+export const setUserInfo = (userInfo) => ({
+  type: UserActionTypes.SET_USER_INFO,
+  payLoad: userInfo,
+});
 
 export const setLogin = (user) => (dispatch) => {
   axios

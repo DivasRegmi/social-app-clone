@@ -16,8 +16,7 @@ import { ListItem, List, ListItemIcon, ListItemText } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   margin: {
     marginTop: "2px",
-    paddingTop: "0px",
-    paddingBottom: "0px",
+    padding: "0px",
   },
 
   error: {
@@ -75,7 +74,6 @@ const GoogleInput = ({ values, setValues, errors }) => {
                   <ErrorIcon
                     classes={{ root: classes.icon }}
                     color="error"
-                    // style={{ width: "16px", height: "16px" }}
                   />
                 </ListItemIcon>
                 <ListItemText

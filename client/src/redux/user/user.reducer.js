@@ -2,7 +2,8 @@ import { UserActionTypes } from "./user.types";
 
 const INITIAL_STATE = {
   activeUser: false,
-  errors: {err: false}
+  errors: { err: false },
+  userInfo: {},
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -21,6 +22,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         errors: action.payLoad,
+      };
+    case UserActionTypes.SET_USER_INFO:
+      return {
+        ...state,
+        userInfo: action.payLoad,
       };
 
     default:

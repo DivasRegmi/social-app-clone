@@ -57,7 +57,7 @@ function SignUp({ history }) {
       <SignUpLogoBox
         logo={instagramIcon}
         title="Continue with Instagram"
-        onClick={(set) => setinstagram(true)}
+        onClick={(set) => {history.push('/instagram')}}
       />
       {/* New window is pop up  */}
       {facebook ? (

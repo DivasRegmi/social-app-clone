@@ -13,6 +13,8 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import Facebook from "./components/facebook/Facebook";
 import Google from "./components/google/Google";
+import Main from "./pages/main/Main";
+import Error from "./pages/Error";
 
 library.add(fab);
 
@@ -30,9 +32,12 @@ function App({ location }) {
 
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/main" component={Main} />
+
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/facebook/signup" component={Facebook} />
         <Route exact path="/google/signup" component={Google} />
+        <Route  path="*" component={Error} />
       </Switch>
       {headerFooter() ? <Footer /> : ""}
     </div>

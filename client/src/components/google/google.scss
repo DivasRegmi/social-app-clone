@@ -134,16 +134,18 @@
         letter-spacing: 0.1px;
         line-height: 1.5;
         padding-bottom: 0;
-        padding-top: 8px;
-        margin-bottom: 0;
-        margin-top: 0;
+        margin: 8px auto 0;
+        cursor: pointer;
 
-        .logo-and-email{
+        .logo-and-email {
           display: flex;
           align-items: center;
           justify-content: center;
+          border: 1px solid #dadce0;
+          border-radius: 100px;
+          width: fit-content;
 
-          .email{
+          .email {
             margin-left: 5px;
           }
         }
