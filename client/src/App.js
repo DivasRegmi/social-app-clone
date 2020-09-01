@@ -37,7 +37,7 @@ function App({ user }) {
           <Route
             exact
             path="/main"
-            render={() => (user ? <Redirect to="/" /> : <Main />)}
+            render={() => (!user ? <Redirect to="/" /> : <Main />)}
           />
 
           <Route
